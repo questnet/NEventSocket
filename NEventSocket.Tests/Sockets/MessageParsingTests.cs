@@ -239,10 +239,11 @@ namespace NEventSocket.Tests.Sockets
         {
             var parser = new Parser();
             var rawInput = "Content-Type: command/reply\nReply-Text: -ERR\n\n";
+            var byteInput = Encoding.UTF8.GetBytes(rawInput);
 
-            foreach (char c in rawInput)
+            foreach (byte b in byteInput)
             {
-                parser.Append(c);
+                parser.Append(b);
             }
 
             Assert.True(parser.Completed);
@@ -303,10 +304,11 @@ namespace NEventSocket.Tests.Sockets
         {
             var parser = new Parser();
             var rawInput = "Content-Type: api/response\nContent-Length: 4\n\n-ERR";
+            var byteInput = Encoding.UTF8.GetBytes(rawInput);
 
-            foreach (char c in rawInput)
+            foreach (byte b in byteInput)
             {
-                parser.Append(c);
+                parser.Append(b);
             }
 
             Assert.True(parser.Completed);
